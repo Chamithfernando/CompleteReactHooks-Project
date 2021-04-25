@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import { Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { useForm } from './useForm';
 import { Formik } from 'formik';
+import { Hello } from './Hello';
 
 
 
@@ -41,6 +42,19 @@ const App = () => {
 
   const [ values ,handleChange] = useForm({email: '', password: ''});
 
+
+
+  const [showHello, setShowHello] = useState(true);
+
+ /*  useEffect (() => {
+    console.log("render");
+    return () => {
+      console.log("unmount");
+    }
+  }, []);
+ */
+
+
   /* const [ email ,setEmail] = useState("");
   const [ password ,setPassword] = useState(""); */
 
@@ -48,32 +62,31 @@ const App = () => {
   return(
 
 
-  <div>
-
-  <Formik>
-  {() => (
-
-  <>
-    <input
-  name="email"
-  value={values.email}
-  onChange={handleChange}
-  />
-  <input
-  type="password"
-  name="password"
-  value={values.password}
-  onChange={handleChange}
-  />
-  </>
+          <div>
 
 
-  )}
-  </Formik>
+              <>
+              <button onClick={() => setShowHello(!showHello)}>toggle</button>
+               {showHello && <Hello/>}
+                <input
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              />
+              <input
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              />
+              </>
 
-  
-  
-  </div>
+
+
+
+          
+          
+          </div>
 
 
 
