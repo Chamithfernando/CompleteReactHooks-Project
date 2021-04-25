@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import { Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
+import { useForm } from './useForm';
+import { Formik } from 'formik';
+
 
 
 /* function expensiveIntialState(){
@@ -35,25 +38,40 @@ import 'antd/dist/antd.css';
 
 const App = () => {
 
-  const [ email ,setEmail] = useState("");
-  const [ password ,setPassword] = useState("");
+
+  const [ values ,handleChange] = useForm({email: '', password: ''});
+
+  /* const [ email ,setEmail] = useState("");
+  const [ password ,setPassword] = useState(""); */
 
 
   return(
+
+
   <div>
-  <input
+
+  <Formik>
+  {() => (
+
+  <>
+    <input
   name="email"
-  value={email}
-  onChange={e => setEmail(e.target.value)}
+  value={values.email}
+  onChange={handleChange}
   />
   <input
   type="password"
   name="password"
-  value={password}
-  onChange={e => setPassword(e.target.value)}
-  
-  
+  value={values.password}
+  onChange={handleChange}
   />
+  </>
+
+
+  )}
+  </Formik>
+
+  
   
   </div>
 
@@ -61,8 +79,7 @@ const App = () => {
 
   );
 
-  console.log(email);
-  console.log(password);
+
 
 };
 
